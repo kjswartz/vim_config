@@ -98,6 +98,11 @@ let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 
+"/
+"/Markdown
+"/
+let vim_markdown_preview_hotkey='<C-m>'
+
 "---------------Auto-Commands--------------"
 "Automatically source Vimrc file on save.
 augroup autosourcing
