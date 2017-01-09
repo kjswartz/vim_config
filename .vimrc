@@ -5,7 +5,7 @@ syntax enable
 set backspace=indent,eol,start			"Make backspace behave like everyother editor
 set number													"Display line numbers.
 set noerrorbells visualbell t_vb=		"No damn error bells!
-
+set nowrap													"no word wrap
 
 
 "--------------Visuals--------------------"
@@ -22,8 +22,11 @@ set guioptions-=r
 set guioptions-=R
 
 set tabstop=2								"Soft tabs, 2 spaces
+set shiftwidth=2						"Shift to 2
+set softtabstop=2						"Sets the number of columns for a TAB
 
 hi vertsplit guifg=white guibg=white
+
 
 "-----------------Search----------------"
 set hlsearch      					"Highlight all matched terms.
