@@ -101,7 +101,8 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 "/
 "/Markdown
 "/
-let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_hotkey='<C-m>'				" Hot key for loading preview
+let vim_markdown_preview_github=1							" Gihub flavored markdown
 
 "---------------Auto-Commands--------------"
 "Automatically source Vimrc file on save.
