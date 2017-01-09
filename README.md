@@ -38,6 +38,36 @@ Add the following to this file. NOTE the double quote (") is how to mark a comme
 >
 > set backspace=indent,eol,start      "Make backspace behave like everyother editor
 
+Also add the below code to your .vimrc file. This will source your .vimrc file whenever you save `:w`
+
+> "---------------Auto-Commands--------------"
+>
+> "Automatically source Vimrc file on save.
+>
+> augroup autosourcing
+>
+> autocmd!  
+>
+> autocmd BufWritePost .vimrc source %
+>
+> augroup END
+
+
+
+
+#### Mappings (shorcuts)
+You will be editting your .vimrc file a lot and it can be a pain typing `vim ~/.vimrc` all of the time to open the file, or `:e ~/.vimrc` from within vim or mvim.
+
+Enter Mappings! You can set map shortcuts in your .vimrc file just like alias within bash_profile. We set mapping with `nmap`. `<Leader>` is default mapped to `\`. 
+You can change the key it is mapped to if you'd like but I leave it as is. 
+> "Make it easy to edit vimrc file.
+>
+> nmap \<Leader\>ev :tabedit $MYVIMRC\<cr\>
+
+This will alow us to type `\ev` from within vim or mvim in order to bring up our .vimrc file. 
+ 
+
+
 ### .vim Directory
 Create a .vim directory in your root directory. This is where you wil store all of you vim associated files and configurations i.e. colors, bundles, plugins. 
 ```
@@ -67,16 +97,18 @@ file on github of the .vim color scheme I want and then perform a wget on it in 
 ```  
 
 Then all you have to do is update your .vimrc file 
-```
-colorscheme onedark
-```
-.
+> colorscheme onedark
+>
+> set t_CO=256 "Sets terminal colorscheme to use 256 colors
 
 ### Visuals
-Below are some visual options you can setup in your .vimrc file. 
+Below are some visual options you can setup in your .vimrc file. To read more about these options while in vim type `:help guioptions` to bring up the gui options documentation. NOTE `-` removes an option and 
+`+` adds it. NOTE when we set `guioptions` this is only taking effect in mvim as mvim is our gui vim editor. The `guioptions` we our setting here are for mvim splits and scroll bars. You can read more about them
+in the help manual. 
+>
+> set guifont=Menlo:h14				"Set font and size 
+>
 > set guioptions-=e           "we dont want gui tabs
-> 
-> set linespace=15
 > 
 > set guioptions-=l           "Scroll bar visual options.
 > 
@@ -86,6 +118,8 @@ Below are some visual options you can setup in your .vimrc file.
 > 
 > set guioptions-=R
 > 
+> set linespace=15						"Line spacing
+>
 > set tabstop=2               "Soft tabs, 2 spaces
 > 
 > set shiftwidth=2            "Shift to 2
@@ -93,10 +127,6 @@ Below are some visual options you can setup in your .vimrc file.
 > set softtabstop=2           "Sets the number of columns for a TAB 
   
  
-## Mappings and Commands
-
-
-
 ## Reference Links
 * [VIM Cheat Sheet](https://vim.rtorr.com/)
 * [MACVIM](http://macvim-dev.github.io/macvim/)
