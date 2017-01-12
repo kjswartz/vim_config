@@ -25,8 +25,12 @@ set tabstop=2								"Soft tabs, 2 spaces
 set shiftwidth=2						"Shift to 2
 set softtabstop=2						"Sets the number of columns for a TAB
 
+"highlight verticle split with a white bar
 hi vertsplit guifg=white guibg=white
-
+"Highlight active tab with green color
+hi TabLineSel guifg=LightGreen guibg=DarkGreen
+"Highlight nonactive tab with red background
+hi TabLine guifg=LightRed guibg=DarkRed
 
 "-----------------Search----------------"
 set hlsearch      					"Highlight all matched terms.
@@ -40,6 +44,7 @@ set incsearch								"Incrementally highlight, as we type.
 set splitright						"And to the right. This feels more natural
 set splitbelow						"Make splits default to below...
 
+"We'll set simpler mappings to switch between splits.
 nmap <C-J> <C-W><C-J>
 nmap <C-K> <C-W><C-K>
 nmap <C-H> <C-W><C-H>
@@ -88,7 +93,7 @@ nmap <D-1> :NERDTreeToggle<cr>
 "/
 set grepprg=ack													"We want to use Ack for the search.
 let g:grep_cmd_opts = '--noheading'
-
+nmap <D-f> :Ack '
 
 
 "/
