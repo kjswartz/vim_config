@@ -421,6 +421,9 @@ Don't forget to add your tags file to your .gitignore!!!
 
 `<C->` = `ctrl`
 
+I have this git repo in my `~/.vim/` directory and then I hardlinked my `.vimrc`, `.gvimrc` and `plugins.vim` files into the repo. Then created a sym link of my snippets directory from my git repo to `~/.vim/snippets`. 
+So whenever I modify my local gvim, vim or plugins.vim files i can git commit and push. It makes it easy to setup my editor with my preferences on any mac now and I can keep all my snippets up tp date. 
+
 ## Reference Links
 * [VIM Cheat Sheet](https://vim.rtorr.com/)
 * [MACVIM](http://macvim-dev.github.io/macvim/)
