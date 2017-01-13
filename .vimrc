@@ -75,7 +75,7 @@ nmap <Leader>f :tag<space>
 "/CtrlP
 "/
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist'
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:20'
 
 nmap <D-p> :CtrlP<cr>
 nmap <D-r> :CtrlPBufTag<cr>

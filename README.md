@@ -27,6 +27,19 @@ in order to better understand and remember them. NOTE: Enter either `:bd`, `:q` 
 $ vimtutor
 ``` 
 
+Here are some general key mappings to get you started. 
+
+| Mapping | Summary |
+| ------- | ------- |
+| \<esc>	| Exit out of any mode back into normal mode |
+| :q or :quit	| Quit out of Vim |
+| :w or :write | Write the curren t file |
+| j, k | Move the cursor down / up |
+| h, l | Move the cursor left / right |
+| i | Go into "insert mode" to enter text |
+| x | Delete the character under the cursor |
+
+
 VIM has several different [MODES](https://en.wikibooks.org/wiki/Learning_the_vi_Editor/Vim/Modes) it operates in i.e. NORMAL, VISUAL, INSERT. 
 NOTE: If you ever enter a mode you are unfamiliar with, or are not sure which mode you are in, you can usually press ESC to get back to normal mode.
 
@@ -188,8 +201,8 @@ NERDtree allows you to explore your filesystem and to open files and directories
 Just like with Vinegar we need to add the plugin to our `plugins.vim` file, source `.vimrc` by going to it and saving `:w`, and then `:PluginInstall` within .vimrc.
 > Plugin 'scrooloose/nerdtree' 
 
-Adding the below options to our `.vimrc` will setup a keyboard shortcut for toggling NERDTree on and off and will make sure NERDTree behaves like NERDTree and not Vinegar. Here we are mapping the toggle to 
-work when you press command and then 1 (from within normal mode).  
+Adding the below options to our `.vimrc` will setup a keyboard shortcut for toggling NERDTree on and off. Setting NERDTreeHijackNetrw to 0 will prevent NERDTree from taking over Vinegar plugin we setup for directory browsing and navigation.
+Here we are mapping the toggle to work when you press command and then 1 (from within normal mode).  
 > let NERDTreeHijackNetrw = 0
 > 
 > "Make nerd tree toggle easier.
@@ -298,22 +311,30 @@ So once again open your `plugins.vim` file and insert the following plugins, sav
 #### [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
 CtrlP is a full path fuzzy file, buffer, mru, tag, ... finder for Vim. This plugin so we can search through our directories for files and bring up recently opened files. 
 
-
+These settings are going to ignore files and directories for searching and set were we display the results. Refer to the CtrlP site or help for more details on these.
 > let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist'
 
 > let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
 
-  
+Since we disabled the `<D-p> (cmd-p)` macvim GUI shortcut in our `.gvimrc` file earlier, we can now use that mapping for CtrlP in our `.vimrc` file. Now you can hit `<D-p>` and start typing and you should see 
+you're results at the top of your macvim window. `<D-p>` will still trigger print in vim, this shortcut mapping will only work for macvim. NOTE `<C-p>` is a default shortcut/mapping for this plugin. So you can use
+`<C-p>` shortcut in vim or macvim, I just prefer using the command key. It feels more natural like command-f for searching. 
+> nmap \<D-p> :CtrlP\<cr>
 
-> nmap <D-p> :CtrlP<cr>
+This shortcut is also already defaulted to `<C-r>`, but again command key feels like a good starting key for searching shortcuts. That's the nice thing about vim, you can configure it however you want. 
+`:CtrlBufTag` will bring up a list of any tags or symbols you've defined, like variables, methods, or functions within the file you currently have open. This does not search through your whole project!
+> nmap \<D-r> :CtrlPBufTag\<cr>
 
-> nmap <D-r> :CtrlPBufTag<cr>
-
-> nmap <D-e> :CtrlPMRUFiles<cr>
-
+This mapping sets `<D-e>` to bring up a list of recently viewed files. Move your cursor to the file you want and then you can open it several different ways. 
+`<C-v>` will open in a vertical split to the right, or hitting `<Enter>` will open in a horizontal split (above or below current window, depending on your .vimrc configuration). You can even use 
+`<C-t>` to open in a new tab. 
+> nmap \<D-e> :CtrlPMRUFiles\<cr>
 
 #### [greplace](https://github.com/skwp/greplace.vim)
 VIM Plugin for doing a search and replace across many files.
+
+
+
 
 #### [ack](https://github.com/mileszs/ack.vim)
 Run your favorite search tool from Vim, with an enhanced results list. We are basically using `ack` as a wrapper for `greplace`.
@@ -325,7 +346,32 @@ Run your favorite search tool from Vim, with an enhanced results list. We are ba
 ### [SnipMate](https://github.com/garbas/vim-snipmate)
 
 
+### Ctags
+Ctags are a way tag methods and functions in your project. This will allow you use of shortcut keys 
+Install ctags if you dont already have them. You can run this command even if you do have them, you'll just get a message telling you they're already
+installed.
+```
+$ brew install ctags
+```
+I also setup an alias in my `.bash_profile` for generating my tags file.
+```
+$ vim ~/.bash_profile
+```
+> alias tag="ctags -R --exclude=.git --exclude=\*.min.js --exclude=\*-min.js --exclude=log \*"
 
+Now when we are in a project directory we can run `tag` to generate our tags file. This will exclude ctags from looking at a few different files while generating tags (logs and .min js files). The 
+`*` at the end specifies to run the ctags command on the entire directory it was executed in. 
+
+To use ctags cd to a project directory via terminal and run your tag command. Or if you are in mvim from normal mode type `:!tag`. The `!` or `:sh` command starts a shell.  
+When the shell exits (after the "exit" command) you return to Vim or macvim. This will create a `tags` file in your project. Add it to your `.gitignore`.
+
+Within your app you can search for tags, or if your cursor is on a method or function call you can use the shortcut `<C-]>` to be taken to were that method or function is defined. 
+To go back to were you just were you can type `<C-6>`. Or you can use `<C-o>` and `<C-i>` to cycle through you're edit points. `<C-o>` is used to travel backward through files and `<C-i>` to to go 
+forward.
+
+If you define any new methods you'll have to run the `:!tag` or `tag` command again (depending on you're current window.
+Don't forget to add your tags file to your .gitignore!!!
+## Misc Useful Shortcuts
 
 
 ## Reference Links
