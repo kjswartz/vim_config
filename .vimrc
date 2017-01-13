@@ -27,8 +27,16 @@ set softtabstop=2						"Sets the number of columns for a TAB
 
 "highlight verticle split with a white bar
 hi vertsplit guifg=white guibg=white
+
+"highlight horizontal split of NON ACTIVE window
+hi StatusLineNC guifg=LightRed guibg=DarkRed
+
+"highlight horizontal split of active window. this will also 
+hi StatusLine guifg=LightGreen guibg=DarkGreen
+
 "Highlight active tab with green color
 hi TabLineSel guifg=LightGreen guibg=DarkGreen
+
 "Highlight nonactive tab with red background
 hi TabLine guifg=LightRed guibg=DarkRed
 
@@ -67,6 +75,9 @@ nmap <Leader><space> :nohlsearch<cr>
 "Searching tags
 nmap <Leader>f :tag<space>
 
+"Set modifiable to on
+nmap <Leader>m :set ma<cr>
+
 " Make toggling quotes super easy.
 "nmap <D-3> <Plug>Csurround "'
 "nmap <D-4> <Plug>Csurround '"
@@ -74,7 +85,7 @@ nmap <Leader>f :tag<space>
 "/
 "/CtrlP
 "/
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|tags\'
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:20'
 
 nmap <D-p> :CtrlP<cr>
@@ -93,7 +104,7 @@ nmap <D-1> :NERDTreeToggle<cr>
 "/
 set grepprg=ack													"We want to use Ack for the search.
 let g:grep_cmd_opts = '--noheading'
-nmap <D-f> :Ack '
+nmap <D-f> :Gsearch<cr>
 
 
 "/

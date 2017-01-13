@@ -39,10 +39,8 @@ Here are some general key mappings to get you started.
 | i | Go into "insert mode" to enter text |
 | x | Delete the character under the cursor |
 
-
 VIM has several different [MODES](https://en.wikibooks.org/wiki/Learning_the_vi_Editor/Vim/Modes) it operates in i.e. NORMAL, VISUAL, INSERT. 
 NOTE: If you ever enter a mode you are unfamiliar with, or are not sure which mode you are in, you can usually press ESC to get back to normal mode.
-
 
 | Name	| Description	| help page |
 | ----- | ----------- | --------- |
@@ -333,21 +331,63 @@ This mapping sets `<D-e>` to bring up a list of recently viewed files. Move your
 #### [greplace](https://github.com/skwp/greplace.vim)
 VIM Plugin for doing a search and replace across many files.
 
+- Use :Gsearch to get a buffer window of your search results
+- then you can make the replacements inside the buffer window using traditional tools (%s/foo/bar/)
+- Invoke :Greplace to make your changes across all files. It will ask you interatively y/n/a - you can hit 'a' to do all.
+- Save changes to all files with :wall (write all)
 
+We need to setup greplace to use `ack` plugin for searching through our files. I also mapped a shortcut for this search to be `<D-f>`. So now if we want to just look for terms within our
+current file we type `/<search term>`, if we want global search we use `<D-f>`. 
+> set grepprg=ack                         "We want to use Ack for the search.
+>
+> let g:grep_cmd_opts = '--noheading'
+>
+> nmap \<D-f> :Gsearch\<cr>
 
+Searching like this will populate a window with our search results. We can highlight our results and then `:s/<search_term>/<replace_with>` to change the files. Then `:Greplace` to modify al the files, and 
+it will ask you if you want change one at a time, you can just hit `a` to change all occurances. Then `:wa` to save all. 
+
+Seems like a lot compared with other editors like Atom or Sublime, but if you set up some shortcuts its not that much more key strokes.
 
 #### [ack](https://github.com/mileszs/ack.vim)
-Run your favorite search tool from Vim, with an enhanced results list. We are basically using `ack` as a wrapper for `greplace`.
+We are using `ack` as a wrapper for `greplace`. Search recursively in {directory} (which defaults to the current directory) for the {pattern}. 
+`:Ack! [options] {pattern} [{directories}]`.
+Behaves just like the `:grep` command, but will open the `Quickfix` window for you. If `!` is not given the first occurrence is jumped to. 
 
-
-
-
+Currently I only utilize Ack in the background via Greplace searching.
 
 ### [SnipMate](https://github.com/garbas/vim-snipmate)
+This plugin is probably one of the biggest reasons I'm making the effort to learn vim/macvim. Yes I know I can do this in other editors as well, but I've gone too far to turn around now. 
+SnipMate depends on `vim-addon-mw-utils` and `tlib`. Lets add these to our
+`plugins.vim` save, save our `.vimrc` and `:PluginInstall`.
+> Plugin 'MarcWeber/vim-addon-mw-utils'
+>
+> Plugin 'tomtom/tlib_vim'
+>
+> Plugin 'garbas/vim-snipmate'
 
+Create a snippets directory in your .vim directory.
+```
+$ mkdir ~/.vim/snippets
+```
+You can create directories based on languages. I have three directories currently javascript, ruby, and text. Then you label your file `<name>.snippet` and place your write up inside. 
 
-### Ctags
-Ctags are a way tag methods and functions in your project. This will allow you use of shortcut keys 
+SnipMate aims to provide support for textual snippets, similar to TextMate or other Vim plugins like UltiSnips. For example, in JavaScript, typing `fun<tab>` could be expanded to
+```
+function ${1:function_name}(${2:argument}) {
+	${3:// body}
+}
+```
+
+If snippets are not working for you add the below to your `.vimrc` file. Checkout the [SnipMate github](https://github.com/garbas/vim-snipmate) for further explaination.
+> let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
+>
+> let g:snipMate.scope_aliases = {}
+>
+> let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
+
+## Ctags
+Ctags are a way tag methods and functions in your project so you can easily lookup where they are defined. This will allow you use of shortcut keys 
 Install ctags if you dont already have them. You can run this command even if you do have them, you'll just get a message telling you they're already
 installed.
 ```
@@ -369,11 +409,19 @@ Within your app you can search for tags, or if your cursor is on a method or fun
 To go back to were you just were you can type `<C-6>`. Or you can use `<C-o>` and `<C-i>` to cycle through you're edit points. `<C-o>` is used to travel backward through files and `<C-i>` to to go 
 forward.
 
+If you want to search for project tags use `:tag <name>`. I also mapped a shortcut in my .vimrc for this to be `<Leader>-f`. You can also use tab complete here.
+
 If you define any new methods you'll have to run the `:!tag` or `tag` command again (depending on you're current window.
 Don't forget to add your tags file to your .gitignore!!!
-## Misc Useful Shortcuts
 
+## Misc Notes
+`<Leader>` = `\`
+
+`<D->` = `cmd`
+
+`<C->` = `ctrl`
 
 ## Reference Links
 * [VIM Cheat Sheet](https://vim.rtorr.com/)
 * [MACVIM](http://macvim-dev.github.io/macvim/)
+* [Vim Awesome](http://vimawesome.com/)
