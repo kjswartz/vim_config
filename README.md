@@ -342,7 +342,7 @@ current file we type `/<search term>`, if we want global search we use `<D-f>`.
 >
 > let g:grep_cmd_opts = '--noheading'
 >
-> nmap \<D-f> :Gsearch\<cr>
+> nmap \<Leader>fr :Gsearch\<cr>
 
 Searching like this will populate a window with our search results. We can highlight our results and then `:s/<search_term>/<replace_with>` to change the files. Then `:Greplace` to modify al the files, and 
 it will ask you if you want change one at a time, you can just hit `a` to change all occurances. Then `:wa` to save all. 
@@ -354,7 +354,8 @@ We are using `ack` as a wrapper for `greplace`. Search recursively in {directory
 `:Ack! [options] {pattern} [{directories}]`.
 Behaves just like the `:grep` command, but will open the `Quickfix` window for you. If `!` is not given the first occurrence is jumped to. 
 
-Currently I only utilize Ack in the background via Greplace searching.
+I set up the following shortcut just for searching for a term throughout my project. 
+> nmap \<D-f> :Ack! '
 
 ### [SnipMate](https://github.com/garbas/vim-snipmate)
 This plugin is probably one of the biggest reasons I'm making the effort to learn vim/macvim. Yes I know I can do this in other editors as well, but I've gone too far to turn around now. 

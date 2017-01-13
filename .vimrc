@@ -78,6 +78,8 @@ nmap <Leader>f :tag<space>
 "Set modifiable to on
 nmap <Leader>m :set ma<cr>
 
+"Ack searching
+nmap <D-f> :Ack! '
 " Make toggling quotes super easy.
 "nmap <D-3> <Plug>Csurround "'
 "nmap <D-4> <Plug>Csurround '"
@@ -104,7 +106,7 @@ nmap <D-1> :NERDTreeToggle<cr>
 "/
 set grepprg=ack													"We want to use Ack for the search.
 let g:grep_cmd_opts = '--noheading'
-nmap <D-f> :Gsearch<cr>
+nmap <Leader>fr :Gsearch<cr>
 
 
 "/
