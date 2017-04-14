@@ -23,7 +23,6 @@ set guioptions-=R
 
 set tabstop=2								"Soft tabs, 2 spaces
 set shiftwidth=2						"Shift to 2
-set softtabstop=2						"Sets the number of columns for a TAB
 
 "highlight verticle split with a white bar
 hi vertsplit guifg=white guibg=white
