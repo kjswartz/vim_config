@@ -5,6 +5,48 @@ set up with some configurations to help mirror editors like Atom or Sublime. Why
 Because vim/mvim offers a lot of control over configurations and shortcuts which can greatly improve productivity.
 I've also noticed a substantial improvment on my ability to navigate and edit via the command line since I started using mvim. 
 
+## Table of Contents
+- [Installation](#installation)
+
+- [Introduction to VIM](#introduction-to-vim)
+
+- [Setting Up Initial Directory Structure](#setting-up-initial-directory-structure)
+	- [.vimrc File](#vimrc-file)
+
+	- [.vim Directory](#vim-directory)
+
+	- [Mapping Shortcuts](#mapping-shortcuts)
+
+- [Making VIM Pretty](#making-vim-pretty)
+	- [Updating Color Scheme](#updating-color-scheme)
+
+	- [Visuals](#visuals)
+
+- [Plugins](#plugins)
+	- [Vundle Plugin Manager](#vundle-plugin-manager)
+
+	- [Vinegar Directory Browsing](#vinegar-directory-browsing)
+
+	- [NERDTree Sidebar Directory Tree](#nerdtree-sidebar-directory-tree)
+
+	- [Basic Searching](#basic-searching)
+
+	- [Advanced Searching](#advanced-searching)
+		- [ctrlp](#ctrlp)
+
+		- [greplace](#greplace)
+
+		- [ack](#ack)
+
+	- [SnipMate](#snipmate)
+
+	- [Ctags](#ctags)
+
+- [Miscellaneous Notes](#miscellaneous-notes)
+
+- [Reference Links](#reference-links)
+
+## Installation 
 This walk through utilizes Homebrew to install a few dependencies. First you need to get vim and macvim installed.
 ```
 $ brew install vim && brew install macvim
@@ -20,6 +62,7 @@ Now within terminal to open files and directories just use the below command.
 $ mvim or mvim .
 ``` 
 
+([back to top](#table-of-contents))
 ## Introduction to VIM
 Run the below in a terminal window in order to run through the VIM crash course. This is a great place to start to learn the basic navigation of vim. 
 They (the people on the internet) claim you can run through this tutorial in 30 minutes. It took me a little longer because I ran through the lessons a couple of times each
@@ -52,8 +95,9 @@ NOTE: If you ever enter a mode you are unfamiliar with, or are not sure which mo
 | command-line | For entering editor commands - like the help commands in the 3rd column. | :help Command-line-mode
 | Ex-mode | Similar to the command-line mode but optimized for batch processing. | :help Ex-mode
 
+([back to top](#table-of-contents))
 ## Setting Up Initial Directory Structure
-### .vimrc File
+### vimrc File
 If a .vimrc file did not get created during the installation process then just create it yourself. Keep this in you main root directory. 
 This file is where you will set all of your vim and macvim options. Why do I need macvim and vim? Macvim offers several GUI conveniencies over vim, such as mouse select and you can copy, paste and cut
 using the keyboard shortcuts you are used to (cmd-v, x, c).
@@ -81,13 +125,15 @@ Adding the below code to your .vimrc file will allow you to source your .vimrc f
 >
 > augroup END
 
-### .vim Directory
+([back to top](#table-of-contents))
+### vim Directory
 Create a .vim directory in your root directory. This is where you wil store all of you vim associated files and configurations i.e. colors, bundles, plugins. 
 ```
 $ mkdir ~/.vim
 ```
 
-#### Mappings (shorcuts)
+([back to top](#table-of-contents))
+### Mapping Shorcuts
 You will be editting your .vimrc file a lot and it can be a pain typing `vim ~/.vimrc` all of the time to open the file, or `:e ~/.vimrc` from within vim or mvim.
 
 Enter Mappings! You can set map shortcuts in your .vimrc file just like `alias` within bash_profile. We set mapping with `nmap`. `<Leader>` is default mapped to `\`. 
@@ -98,6 +144,7 @@ You can change the key it is mapped to if you'd like but I leave it as is.
 
 This will allow us to type `\ev` from within vim or mvim in order to bring up our .vimrc file. You can also map shortcuts to `CMD` or `CTRL` key as well. 
 
+([back to top](#table-of-contents))
 ## Making VIM Pretty
 
 ### Updating Color Scheme 
@@ -125,6 +172,7 @@ Then all you have to do is update the `colorscheme` option in your .vimrc file. 
 >
 > set t_CO=256 "Sets terminal colorscheme to use 256 colors
 
+([back to top](#table-of-contents))
 ### Visuals
 Below are some visual options you can setup in your .vimrc file. To read more about these options while in vim type `:help <option_name>` to bring up the gui options documentation. 
 > set linespace=15						"Line spacing
@@ -135,10 +183,12 @@ Below are some visual options you can setup in your .vimrc file. To read more ab
 > 
 > set softtabstop=2           "Sets the number of columns for a TAB 
 
+([back to top](#table-of-contents))
 ## Plugins
 Plugins are used in order to add additional functionality to vim or mvim. They are like gems, coco pods, or node packages. 
 
-### [Vundle](https://github.com/VundleVim/Vundle.vim): Plugin manager
+([back to top](#table-of-contents))
+### [Vundle](https://github.com/VundleVim/Vundle.vim) Plugin Manager
 Vundle is short for Vim bundle and is a Vim plugin manager. We'll use this in order to install our plugins.
 
 First we need to setup a bundle directory to store our plugins. 
@@ -176,7 +226,8 @@ Finally we have to import the `plugins.vim` file into our `.vimrc` file. So we c
 
 Now when we add a new Plugin to our PLugins.vim file we save it and then in our .vimrc file we can `:w` and then `:PluginInstall` 
 
-### [Vinegar](https://github.com/tpope/vim-vinegar): Directory browsing
+([back to top](#table-of-contents))
+### [Vinegar](https://github.com/tpope/vim-vinegar) Directory Browsing
 [Netrw](http://www.vim.org/scripts/script.php?script_id=1075) is vim's built in directory browser. Vinegar.vim enhances netrw, partially in an attempt to mitigate the need for more disruptive "project drawer" style plugins.
 In order to add this `Plugin` we'll open our `plugins.vim` file and add it between the vundle calls.
 ```
@@ -193,7 +244,8 @@ for keyboard mappings.
 If at any point in browsing your directories you want to stop and go back to the file you original had open you can either `<C-o>` until the screen goes back to the point where it is available, or you can
 simply type `:bd` for buffer drop. NOTE: `<C-o>` and `<C-i>` can be used throughout vim in order to move back and forth through edit points. Play around and you'll see or google to learn more.   
 
-### [NERDTree](https://github.com/scrooloose/nerdtree): Sidebar directory tree
+([back to top](#table-of-contents))
+### [NERDTree](https://github.com/scrooloose/nerdtree) Sidebar Directory Tree
 Vinegar is pretty neat and makes browsing through your directories and files easier, but we can make our Macvim even better with sidebar directory layout we are used to with most editors like Sublime, Atom, or Xcode.
 NERDtree allows you to explore your filesystem and to open files and directories. It presents the filesystem to you in the form of a tree which you manipulate with the keyboard and/or mouse. It also allows you to perform simple filesystem operations.
 
@@ -262,6 +314,7 @@ Below are some additional NERDTree visual options you can configure. I ended up 
 >
 > hi TabLine guifg=LightRed guibg=DarkRed 
 
+([back to top](#table-of-contents))
 ### Basic Searching
 We can search through the current file we have open by typing `/` while in normal mode, and you'll see the slash populate at the bottom. Then just start typing and hit `Enter` to 
 go to the first occurance found in the file. You should see your cursor placed on the occurance, then just use `n` to cycle forward (down) or `N (shift-n)` backward (up) through the matches.
@@ -277,6 +330,7 @@ In order to remove the highlighting we can setup a mapping to avoid having to ty
 > 
 > nmap <Leader><space> :nohlsearch<cr>
 
+([back to top](#table-of-contents))
 ### Advanced Searching
 Searching through files not open in vim, in a grep like manner (think cmd-shft-f in atom) is a bit of a process. 
 We're going to have to install a few different plugins to get everything setup and configured to work somewhat how we are used to search working. Having to install and configure all of these 
@@ -307,6 +361,7 @@ So once again open your `plugins.vim` file and insert the following plugins, sav
 >
 > Plugin 'skwp/greplace.vim'
 
+([back to top](#table-of-contents))
 #### [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
 CtrlP is a full path fuzzy file, buffer, mru, tag, ... finder for Vim. This plugin so we can search through our directories for files and bring up recently opened files. 
 
@@ -329,6 +384,7 @@ This mapping sets `<D-e>` to bring up a list of recently viewed files. Move your
 `<C-t>` to open in a new tab. 
 > nmap \<D-e> :CtrlPMRUFiles\<cr>
 
+([back to top](#table-of-contents))
 #### [greplace](https://github.com/skwp/greplace.vim)
 VIM Plugin for doing a search and replace across many files.
 
@@ -350,6 +406,7 @@ it will ask you if you want change one at a time, you can just hit `a` to change
 
 Seems like a lot compared with other editors like Atom or Sublime, but if you set up some shortcuts its not that much more key strokes.
 
+([back to top](#table-of-contents))
 #### [ack](https://github.com/mileszs/ack.vim)
 We are using `ack` as a wrapper for `greplace`. Search recursively in {directory} (which defaults to the current directory) for the {pattern}. 
 `:Ack! [options] {pattern} [{directories}]`.
@@ -358,6 +415,7 @@ Behaves just like the `:grep` command, but will open the `Quickfix` window for y
 I set up the following shortcut just for searching for a term throughout my project. 
 > nmap \<D-f> :Ack! '
 
+([back to top](#table-of-contents))
 ### [SnipMate](https://github.com/garbas/vim-snipmate)
 This plugin is probably one of the biggest reasons I'm making the effort to learn vim/macvim. Yes I know I can do this in other editors as well, but I've gone too far to turn around now. 
 SnipMate depends on `vim-addon-mw-utils` and `tlib`. Lets add these to our
@@ -388,6 +446,7 @@ If snippets are not working for you add the below to your `.vimrc` file. Checkou
 >
 > let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 
+([back to top](#table-of-contents))
 ## Ctags
 Ctags are a way tag methods and functions in your project so you can easily lookup where they are defined. This will allow you use of shortcut keys 
 Install ctags if you dont already have them. You can run this command even if you do have them, you'll just get a message telling you they're already
@@ -416,7 +475,8 @@ If you want to search for project tags use `:tag <name>`. I also mapped a shortc
 If you define any new methods you'll have to run the `:!tag` or `tag` command again (depending on you're current window.
 Don't forget to add your tags file to your .gitignore!!!
 
-## Misc Notes
+([back to top](#table-of-contents))
+## Miscellaneous Notes
 `<Leader>` = `\`
 
 `<D->` = `cmd`
@@ -426,7 +486,10 @@ Don't forget to add your tags file to your .gitignore!!!
 I have this git repo in my `~/.vim/` directory and then I hardlinked my `.vimrc`, `.gvimrc` and `plugins.vim` files into the repo. Then created a sym link of my snippets directory from my git repo to `~/.vim/snippets`. 
 So whenever I modify my local gvim, vim or plugins.vim files i can git commit and push. It makes it easy to setup my editor with my preferences on any mac now and I can keep all my snippets up tp date. 
 
+([back to top](#table-of-contents))
 ## Reference Links
 * [VIM Cheat Sheet](https://vim.rtorr.com/)
 * [MACVIM](http://macvim-dev.github.io/macvim/)
 * [Vim Awesome](http://vimawesome.com/)
+
+([back to top](#table-of-contents))
