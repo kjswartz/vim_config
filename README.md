@@ -1,8 +1,9 @@
 # Initial VIM/MVIM Setup
 This is just a basic introduction to help you get VIM and MACVIM setup and a few settings configured. You can clone down and copy the .vimrc, .gvimrc, and plugins.vim files as is and 
 below I will walkthrough were they go as well as cover what the various settings relate to. This will NOT make you an expert in vim/mvim. This is just to help get your initial environment 
-set up with some configurations to help mirror editors like Atom or Sublime. Why not just use Atom or Sublime if you are going to setup mvim to operate like them anyways? Because vom/mvim 
-offers a lot of control over configurations and shortcuts which can greatly improve productivity.
+set up with some configurations to help mirror editors like Atom or Sublime. Why not just use Atom or Sublime if you are going to setup mvim to operate like them anyways? 
+Because vim/mvim offers a lot of control over configurations and shortcuts which can greatly improve productivity.
+I've also noticed a substantial improvment on my ability to navigate and edit via the command line since I started using mvim. 
 
 This walk through utilizes Homebrew to install a few dependencies. First you need to get vim and macvim installed.
 ```
